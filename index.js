@@ -1,16 +1,18 @@
 import { ApolloServer } from "apollo-server";
 import { gql } from "graphql-tag";
+import { Mongoose } from "mongoose";
+import { MONGODB } from './config';
 
-const typeDefs = `
-type Post{
-    id:ID!
-    username:String!
-    body:String!
-    createdAt:String!
-}
-type Query{
-getPosts:[Post]
 
-}
 
-`
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
+});
+
+Mongoose.connect(MONGODB, { useNewUrlParser: true }).then(() => {
+    return server.listen({ port: 5000 });
+}).then((res) => {
+    console.log(`server running on port${res.url}`);
+});
+
