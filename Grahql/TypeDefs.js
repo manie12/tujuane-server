@@ -12,6 +12,7 @@ type User{
     email:String!
     username:String!
     createdAt:String!
+    token:String!
 }
 input RegisterInput{
     username:String!
