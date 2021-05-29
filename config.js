@@ -1,1 +1,1 @@
-export const MONGODB = "mongodb+srv://jacobruno:<password>@cluster0.hbq23.mongodb.net/tujuane?retryWrites=true&w=majority"
+export const MONGODB = "mongodb+srv://jacobruno:@Manie12@cluster0.hbq23.mongodb.net/tujuane?retryWrites=true&w=majority"

@@ -1,7 +1,8 @@
 import { ApolloServer } from "apollo-server";
 import mongoose from "mongoose";
-import { MONGODB } from './config';
-
+import { MONGODB } from './config.js';
+import { typeDefs } from './Grahql/TypeDefs.js';
+import { resolvers } from './Grahql/Resolvers/index.js'
 
 
 const server = new ApolloServer({
