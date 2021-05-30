@@ -30,12 +30,12 @@ export const userResolvers = {
             }
             const token = jwt.sign({
                 id: user._id,
-                email: user._email,
-                username: user._username
+                email: user.email,
+                username: user.username
             }, SECRET_KEY, { expiresIn: '1h' });
 
             return {
-                ...user._doc,
+                username: username,
                 id: user._id,
                 token
             }
@@ -43,9 +43,9 @@ export const userResolvers = {
         },
 
 
-        async register(_, { registerInput: { username, email, password, confirmPassword }, context, info }) {
+        async register(_, { registerInput: { username, email, password, confirmPassword } }) {
             const { valid, errors } = registerValidation(username, email, password, confirmPassword);
-            if (!valid) {
+            if (valid) {
                 throw new UserInputError("validation errors", { errors })
             }
             const user = await User.findOne({ username });
@@ -69,8 +69,8 @@ export const userResolvers = {
             const res = await newUser.save();
             const token = jwt.sign({
                 id: res._id,
-                email: res._email,
-                username: res._username
+                email: res.email,
+                username: res.username
             }, SECRET_KEY, { expiresIn: "1h" });
 
             return {

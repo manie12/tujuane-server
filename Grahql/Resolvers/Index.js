@@ -1,4 +1,4 @@
-import { postResolvers } from './Post.js';
+import { postResolvers, } from './Post.js';
 import { userResolvers } from './User.js';
 
 export const resolvers = {
@@ -6,6 +6,7 @@ export const resolvers = {
         ...postResolvers.Query
     },
     Mutation: {
-        ...userResolvers.Mutation
+        ...userResolvers.Mutation,
+        ...postResolvers.Mutation
     }
 }

@@ -7,7 +7,8 @@ import { resolvers } from './Grahql/Resolvers/index.js'
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req })
 });
 
 mongoose.connect(MONGODB, { useNewUrlParser: true }).then(() => {

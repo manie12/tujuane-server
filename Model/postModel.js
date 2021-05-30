@@ -17,7 +17,11 @@ const postSchema = new mongoose.Schema({
             createdAt: String
         }
     ]
-
+    ,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        refs: "users"
+    }
 });
 
 const postModel = mongoose.model("Post", postSchema);
