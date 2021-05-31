@@ -35,7 +35,8 @@ export const userResolvers = {
             }, SECRET_KEY, { expiresIn: '1h' });
 
             return {
-                username: username,
+                ...user._doc,
+                username: user.username,
                 id: user._id,
                 token
             }
@@ -74,7 +75,7 @@ export const userResolvers = {
             }, SECRET_KEY, { expiresIn: "1h" });
 
             return {
-
+                ...res._doc,
                 id: res._id,
                 token,
                 email: res.email,

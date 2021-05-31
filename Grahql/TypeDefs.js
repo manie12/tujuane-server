@@ -6,6 +6,19 @@ type Post{
     username:String!
     body:String!
     createdAt:String!
+    comments:[Comments]!
+    likes:[Likes]
+}
+type Likes{
+    id:ID!
+    username:String!
+    createdAt:String!
+}
+type  Comments{
+    id:ID!
+    username:String!
+    createdAt:String!
+    body:String!
 }
 type User{
     id:ID!
@@ -29,6 +42,8 @@ type Mutation{
     register(registerInput:RegisterInput):User!
     login(username:String!,password:String!):User!
     createPost(body:String!):Post!
+    deletePost(postId:ID!):String!
+    createComment(postId:ID!,commentId:ID!):Post!
 }
 
 `
