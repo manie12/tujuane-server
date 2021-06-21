@@ -1,6 +1,6 @@
 import { AuthenticationError } from 'apollo-server';
-import Posts from '../../Model/postModel.js';
-import { checkAuth } from '../../Utils/checkAuth.js'
+import Post from '../../Model/postModel.js';
+import { checkAuth } from '../../Utils/checkAuth.js';
 
 export const postResolvers = {
     Query: {
@@ -33,7 +33,7 @@ export const postResolvers = {
     async deletePost(_, { postId }, context) {
         const user = checkAuth(context);
         try {
-            const post = await Posts.findById(postId);
+            const post = await Post.findById(postId);
             console.log(post)
             if (user.username === post.username) {
                 await post.delete();

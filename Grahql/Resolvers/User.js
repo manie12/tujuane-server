@@ -3,13 +3,14 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../Model/UserModel.js';
 import { SECRET_KEY } from '../../config.js';
-import { registerValidation, loginValidation } from '../../Utils/RegisterValidation.js';
+import { registerValidation } from '../../Utils/RegisterValidation.js';
+import { loginValidation } from '../../Utils/LoginReg.js'
 
 export const userResolvers = {
     Mutation: {
         async login(_, { username, password }) {
-            const { valid, errors } = loginValidation(username, password);
-            if (!valid) {
+            const { invalid, errors } = loginValidation(username, password);
+            if (invalid) {
                 throw new UserInputError("validation errors", { errors })
             }
             const user = await User.findOne({ username });
@@ -45,10 +46,12 @@ export const userResolvers = {
 
 
         async register(_, { registerInput: { username, email, password, confirmPassword } }) {
-            const { valid, errors } = registerValidation(username, email, password, confirmPassword);
-            if (valid) {
-                throw new UserInputError("validation errors", { errors })
-            }
+            // const { errors, valid } = registerValidation(username, email, password, confirmPassword);
+            //  if (!valid) {
+            //  throw new UserInputError("validation errors", { errors })
+
+            //  }
+
             const user = await User.findOne({ username });
             if (user) {
                 throw new UserInputError("user already exists", {
